@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
 	orderId: String,
-	customerId: Number,
+	customerId: {
+		type: Number,
+		index: true
+	},
 	customerName: String,
 	totalInCents: Number,
 	date: String,

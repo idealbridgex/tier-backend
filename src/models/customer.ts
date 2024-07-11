@@ -3,15 +3,7 @@ const Schema = mongoose.Schema;
 
 const customerSchema = new Schema({
 	customerId: Number,
-	name: String,
-	totalSpent: {
-		type: Number,
-		default: 0
-	},
-	thisYearSpent: {
-		type: Number,
-		default: 0
-	}
+	name: String
 });
 
 const spentOfYearSchema = new Schema({

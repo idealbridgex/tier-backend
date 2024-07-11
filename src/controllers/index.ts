@@ -48,12 +48,12 @@ export default {
 			return res.status(400).send({ status: "internal error" });
 		}
 	},
-	getCustomers: async (req: Request, res: Response) => {
+	getAllCustomers: async (req: Request, res: Response) => {
 		try {
-			const tierInfos: CustomerInfo[] = await service.customerService.getCustomers();
+			const tierInfos: CustomerInfo[] = await service.customerService.getAllCustomers();
 			return res.status(200).json(tierInfos);
 		} catch (err) {
-			console.log("getCustomers", err);
+			console.log("getAllCustomers", err);
 			return res.status(400).send({ status: "internal error" });
 		}
 	},
@@ -88,22 +88,4 @@ export default {
 			return res.status(400).send({ status: "internal error" });
 		}
 	}
-}
-
-const tierUpdator = async () => {
-	try {
-		// console.log("tierUpdate")
-		const tierInfos: CustomerInfo[] = await service.customerService.getCustomers();
-		tierInfos.map(async (customer) => {
-			await service.customerService.updateTier(customer.customerId);
-		})
-	} catch (err: any) {
-		console.log("tierUpdator", err.message);
-	}
-}
-
-export const updator = () => {
-	cron.schedule('*/10 * * * * *', () => {
-		tierUpdator()
-	});
 }
